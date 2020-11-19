@@ -94,10 +94,16 @@ I also updated `fs.defaultFS` in ${HADOOP_HOME}/etc/hadoop/core-site.xml so that
 ```
 
 ## Accumulo Installation and accumulo-env.sh
-Download Accumulo and upzip.
+Download Accumulo and upzip, or download your latest accumulo build from source. 
+
 ```
 wget "https://apache.osuosl.org/accumulo/2.0.0/accumulo-2.0.0-bin.tar.gz"
 tar xvf accumulo-2.0.0-bin.tar.gz
+```
+In case you are downloading the 2.0.0 version, you need to replace `'accumulo-2.0.0/lib/accumulo-server-base-2.0.0.jar'` with the build with this recent patch (https://github.com/apache/accumulo/pull/1727/commits/b6a9ad000d261f201b6322031d34c60fcbbb9d5a). Otherwise, you will have when your kerberos cache gets expired eventually:
+
+```
+kinit: Ticket expired while renewing credentials
 ```
 
 Update ${ACCUMULO_HOME}/conf/accumulo-env.sh with the correct HADOOP_HOME, ZOOKEEPER_HOME. Set CLASSPATH to include hadoop client,its tools lib, and zookeeper lib directories. 
@@ -147,8 +153,8 @@ trace.user=azureuser/_HOST@AGCECI.ONMICROSOFT.COM
 ## Trace password
 #trace.password=secret
 trace.token.property.keytab=/home/azureuser/azureuser.testvm1.keytab
-general.delegation.token.lifetime=7h
-general.delegation.token.update.interval=1h
+general.delegation.token.lifetime=7d
+general.delegation.token.update.interval=1d
 ```
 
 ## Initialize Accumulo
@@ -335,8 +341,19 @@ accumulo@AGCECI.ONMICROSOFT.COM@accumulo>
 ## Verify you now able to create your test table and delete tables.
 Go back to your user shell terminal and see if you may create a table without error.
 ```
-
 seyan@AGCECI.ONMICROSOFT.COM@seattle> createtable test1
 ```
 
+## Turn on the debug switch for kerberos debugging
+Modify ${ACCUMULO_HOME}/conf/log4j.properties and ${ACCUMULO_HOME}/conf/log4j-service.properties.
+
+```
+log4j.rootLogger=DEBUG, console
+```
+
+Note that your will start to see this `KerberosTicketRenewal` in tserver log.
+
+```
+[KerberosTicketRenewal] DEBUG: Invoking renewal attempt for Kerberos ticket
+```
 
