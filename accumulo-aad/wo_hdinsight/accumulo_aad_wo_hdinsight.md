@@ -94,8 +94,7 @@ I also updated `fs.defaultFS` in ${HADOOP_HOME}/etc/hadoop/core-site.xml so that
 ```
 
 ## Accumulo Installation and accumulo-env.sh
-Download Accumulo and upzip, or download your latest accumulo build from source. 
-
+Download Accumulo and upzip, or download your latest accumulo build from source.
 ```
 wget "https://apache.osuosl.org/accumulo/2.0.0/accumulo-2.0.0-bin.tar.gz"
 tar xvf accumulo-2.0.0-bin.tar.gz
