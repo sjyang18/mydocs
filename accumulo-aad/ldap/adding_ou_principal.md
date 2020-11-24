@@ -70,7 +70,7 @@ ldapsearch -x -W -b "OU=MyCustomOU2,DC=agceci,DC=onmicrosoft,DC=com"
 ```
 
 ## Keytab file for service principal
-ktutil will be used to generate a keytab file for the service principal you created. Not sure how this step can be automated at this time.
+ktutil will be used to generate a keytab file for the service principal you created. We may adapt & script this step with one of methods from (https://stackoverflow.com/questions/37454308/script-kerberos-ktutil-to-make-keytabs).
 
 ```
 azureuser@testvm1:~/ldap$ ktutil
