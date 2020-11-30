@@ -19,6 +19,12 @@ BINDDN  CN=Seokwon Yang,OU=AADDC Users,DC=agceci,DC=onmicrosoft,DC=com
 ```
 Note that I set my BASE and BINDDN as well in the example. Change according to your setting.
 
+Install your self-signed ldaps.crt certificates if your domain is using a self-signed certificate. Download the ldaps.crt and install with following commands. You will have ldap connection error if you do not install your self-signed CA certificate.
+```
+sudo cp ldaps.crt /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+```
+
 Test ldap connectivity with the following `ldapsearch` command. You will be prompt for the password for BINDDN and should see directory object info. 
 
 ```
