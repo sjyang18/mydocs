@@ -46,7 +46,7 @@ ldapadd -x -W -f ./newOU.ldif
 ```
 
 ## Add users and mapped service principal to your OU
-In this example, I am creating a azureuser in testvm2 (which is domain joined Azure VM in my domain) and set the serviePrincipalName. You will modify the values according to your domain, OU you created in the setup, your domain-joined vm name, user name, and its password. Note the password is base-encoded with `UTF-16LE` output. Update the unicodePwd with your base-encoding one. 
+In this example, I am creating a azureuser in testvm2 (which is domain joined Azure VM in my domain) and set the serviePrincipalName. You will modify the values according to your domain, OU you created in the setup, your domain-joined vm name, user name, and its password. Note the password is base-encoded with `UTF-16LE` output. Update the unicodePwd with your base-encoding one.  Create your own unicodePwd from https://www.base64encode.org/.
 
 ```
 dn: CN=azureuser/testvm2.agceci.onmicrosoft.com,OU=MyCustomOU2,DC=agceci,DC=onmicrosoft,DC=com
